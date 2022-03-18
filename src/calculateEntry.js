@@ -31,5 +31,5 @@ const calculateEntry = (entrants = {}) => {
 
 // console.log(calculateEntry([{ name: 'joão', age: 12 }, { name: 'joão', age: 12 }, { name: 'joão', age: 54 }, { name: 'joão', age: 22 }]));
 //
-
+console.log(calculateEntry());
 module.exports = { calculateEntry, countEntrants };
