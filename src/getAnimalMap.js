@@ -23,13 +23,23 @@ const reside = (anim) => {
   return select[0].residents.map((animals) => animals.name);
 };
 
-const includeTrue = (locate) => {
-  const { NE, NW, SE, SW } = locate;
-  const ne = NE.reduce((acc, cv) => {
+//  constroi a estrutura pegida na questão.
+const IncludeConstructor = (n) => {
+  const nm = [n];
+  const back = nm.reduce((acc, cv) => {
     acc[cv] = reside(cv);
     return acc;
   }, {});
-  return { ne };
+  return back;
+};
+
+const includeTrue = (locate) => {
+  const { NE, NW, SE, SW } = locate;
+  const ne = NE.map((incube) => IncludeConstructor(incube));
+  const nw = NW.map((incube) => IncludeConstructor(incube));
+  const se = SE.map((incube) => IncludeConstructor(incube));
+  const sw = SW.map((incube) => IncludeConstructor(incube));
+  return { NE: ne, NW: nw, SE: se, SW: sw };
 };
 
 //  finção primaria <====
