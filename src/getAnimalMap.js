@@ -14,8 +14,21 @@ const location = () => {
   const SW = locationSub('SW');
   return { NE, NW, SE, SW };
 };
-// console.log(location());
-//  ----------------------------
+
+//  ---------------------------->
+
+// funsão para ordenar nomes <====
+const sorted = (use) => {
+  const { NE, NW, SE, SW } = use;
+  NE.forEach((sot) => Object.values(sot)[0].sort());
+  NW.forEach((sot) => Object.values(sot)[0].sort());
+  SE.forEach((sot) => Object.values(sot)[0].sort());
+  SW.forEach((sot) => Object.values(sot)[0].sort());
+  return { NE, NW, SE, SW };
+};
+// console.log(sorted({ NE: [{ lions: ['c', 'b', 'a'] }, { giraffes: ['g', 'd', 'i'] }] }));
+
+//  ---------------------------->
 
 //  recebe um animal e retorna seus residentes <====
 const reside = (anim) => {
@@ -23,7 +36,7 @@ const reside = (anim) => {
   return select[0].residents.map((animals) => animals.name);
 };
 
-//  constroi a estrutura pegida na questão.
+//  constroi a estrutura pegida na questão. <====
 const IncludeConstructor = (n) => {
   const nm = [n];
   const back = nm.reduce((acc, cv) => {
@@ -33,6 +46,7 @@ const IncludeConstructor = (n) => {
   return back;
 };
 
+//  coloca no formato: { NE: [{animal: [população]}]} <====
 const includeTrue = (locate) => {
   const { NE, NW, SE, SW } = locate;
   const ne = NE.map((incube) => IncludeConstructor(incube));
@@ -42,10 +56,18 @@ const includeTrue = (locate) => {
   return { NE: ne, NW: nw, SE: se, SW: sw };
 };
 
+// função de controle <====
+const functionsCall = (check) => {
+  const act = includeTrue(location());
+  if (check.sorted === true) { sorted(act); }
+  return act;
+};
+
 //  finção primaria <====
 const getAnimalMap = (options) => {
   if (options === undefined || options.includeNames === undefined) { return location(); }
-  return includeTrue(location()); //  teste ******
+  const calls = functionsCall(options);
+  return calls;
 };
 console.log(getAnimalMap({ includeNames: true }));
 
